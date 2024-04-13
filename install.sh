@@ -32,7 +32,7 @@ fi
 
 # install ffmpeg
 echo "Downloading and installing ffmpeg"
-wget -q https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
+# wget -q https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz
 mkdir -p tmp
 tar -xf ffmpeg-release-amd64-static.tar.xz --strip-components 1 -C tmp
 cp -v tmp/{ffmpeg,ffprobe,qt-faststart} /usr/local/bin
@@ -47,16 +47,16 @@ read -p "Enter portal name, or press enter for 'MediaCMS : " PORTAL_NAME
 
 echo 'Creating database to be used in MediaCMS'
 
-su -c "psql -c \"CREATE DATABASE mediacms\"" postgres
-su -c "psql -c \"CREATE USER mediacms WITH ENCRYPTED PASSWORD 'mediacms'\"" postgres
-su -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE mediacms TO mediacms\"" postgres
+su -c "psql -c \"CREATE DATABASE jiapink\"" postgres
+su -c "psql -c \"CREATE USER jiapink WITH ENCRYPTED PASSWORD 'jiapink'\"" postgres
+su -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE jiapink TO jiapink\"" postgres
 
-echo 'Creating python virtualenv on /home/mediacms.io'
+echo 'Creating python virtualenv on /home/jiapink.io'
 
-cd /home/mediacms.io
+cd /home/jiapink.io
 virtualenv . --python=python3
-source  /home/mediacms.io/bin/activate
-cd mediacms
+source  /home/jiapink.io/bin/activate
+cd jiapink
 pip install -r requirements.txt
 
 SECRET_KEY=`python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'`
@@ -65,7 +65,7 @@ SECRET_KEY=`python -c 'from django.core.management.utils import get_random_secre
 FRONTEND_HOST=`echo "$FRONTEND_HOST" | sed -r 's/http:\/\///g'`
 FRONTEND_HOST=`echo "$FRONTEND_HOST" | sed -r 's/https:\/\///g'`
 
-sed -i s/localhost/$FRONTEND_HOST/g deploy/local_install/mediacms.io
+sed -i s/localhost/$FRONTEND_HOST/g deploy/local_install/jiapink.io
 
 FRONTEND_HOST_HTTP_PREFIX='http://'$FRONTEND_HOST
 
@@ -88,7 +88,7 @@ echo "from users.models import User; User.objects.create_superuser('admin', 'adm
 
 echo "from django.contrib.sites.models import Site; Site.objects.update(name='$FRONTEND_HOST', domain='$FRONTEND_HOST')" | python manage.py shell
 
-chown -R www-data. /home/mediacms.io/
+chown -R www-data. /home/jiapink.io/
 cp deploy/local_install/celery_long.service /etc/systemd/system/celery_long.service && systemctl enable celery_long && systemctl start celery_long
 cp deploy/local_install/celery_short.service /etc/systemd/system/celery_short.service && systemctl enable celery_short && systemctl start celery_short
 cp deploy/local_install/celery_beat.service /etc/systemd/system/celery_beat.service && systemctl enable celery_beat &&systemctl start celery_beat
@@ -135,12 +135,12 @@ fi
 
 # Bento4 utility installation, for HLS
 
-cd /home/mediacms.io/mediacms
+cd /home/jiapink.io/jiapink
 wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
 unzip Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
-mkdir /home/mediacms.io/mediacms/media_files/hls
+mkdir /home/jiapink.io/jiapink/media_files/hls
 
 # last, set default owner
-chown -R www-data. /home/mediacms.io/
+chown -R www-data. /home/jiapink.io/
 
 echo 'MediaCMS installation completed, open browser on http://'"$FRONTEND_HOST"' and login with user admin and password '"$ADMIN_PASS"''
