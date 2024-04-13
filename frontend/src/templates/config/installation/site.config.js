@@ -12,12 +12,12 @@ module.exports = {
   },
   logo: {
     lightMode: {
-      svg: './static/images/logo_dark.svg',
-      img: './static/images/logo_dark.png',
+      svg: './static/images/logo_jiapink_dark.png',
+      img: './static/images/logo_jiapink_dark.png',
     },
     darkMode: {
-      svg: './static/images/logo_light.svg',
-      img: './static/images/logo_light.png',
+      svg: './static/images/logo_jiapink_light.png',
+      img: './static/images/logo_jiapink_light.png',
     },
   },
   pages: {

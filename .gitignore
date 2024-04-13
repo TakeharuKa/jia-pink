@@ -1,5 +1,7 @@
+.DS_Store
 cli-tool/.env
 frontend/package-lock.json
+frontend/.vscode/sftp.json
 media_files/encoded/
 media_files/original/
 media_files/hls/
