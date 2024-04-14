@@ -56,7 +56,7 @@ echo 'Creating python virtualenv on /home/jiapink.io'
 cd /home/jiapink.io
 virtualenv . --python=python3
 source  /home/jiapink.io/bin/activate
-cd jiapink
+cd jia-pink
 pip install -r requirements.txt
 
 SECRET_KEY=`python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'`
@@ -135,10 +135,10 @@ fi
 
 # Bento4 utility installation, for HLS
 
-cd /home/jiapink.io/jiapink
-wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
+cd /home/jiapink.io/jia-pink
+# wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
 unzip Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
-mkdir /home/jiapink.io/jiapink/media_files/hls
+mkdir /home/jiapink.io/jia-pink/media_files/hls
 
 # last, set default owner
 chown -R www-data. /home/jiapink.io/
